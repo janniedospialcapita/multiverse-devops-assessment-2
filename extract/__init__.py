@@ -12,8 +12,17 @@ def get_input(filename):
 
 def remove_duplicates(data):
     data_deduped =[]
-    for x in data:
-        if x not in data_deduped:
-            data_deduped.append(x)
+    for i in data:
+        if i not in data_deduped:
+            data_deduped.append(i)
 
     return data_deduped
+
+
+def remove_empty_lines(data):
+    lines_not_empty =[]
+    for i in data:
+        if len([x for x in i if x != '']) > 0:
+            lines_not_empty.append(i)
+
+    return lines_not_empty
