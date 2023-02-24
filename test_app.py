@@ -2,12 +2,14 @@ import pytest
 import pandas as pd
 import numpy as np
 import re
+
 from extract import get_input
 from extract import remove_duplicates
 from extract import remove_empty_lines
 from extract import capitalise_names
 from extract import validate_answer3
 from extract import save_output
+from output import read_output
 
 def test_input_is_list():
     
@@ -16,10 +18,10 @@ def test_input_is_list():
     expected_output = list
 
     # Act
-    output = get_input(filename)
+    output = type(get_input(filename))
 
     # Assert
-    assert type(output) == expected_output
+    assert output == expected_output
 
 def test_duplicates_removal():
     
@@ -31,10 +33,10 @@ def test_duplicates_removal():
     
     # Act
     input = get_input(filename)
-    output = remove_duplicates(input)
+    output = len(remove_duplicates(input))
     
     # Assert
-    assert len(output) == expected_output
+    assert output == expected_output
 
 def test_empty_line_removal():
     
@@ -46,10 +48,10 @@ def test_empty_line_removal():
 
      # Act
     input = get_input(filename)
-    output = remove_empty_lines(input)
+    output = len(remove_empty_lines(input))
     
     # Assert
-    assert len(output) == expected_output
+    assert output == expected_output
 
 def test_capitalise():
     
@@ -89,10 +91,10 @@ def test_answer3_validation():
     # Act
     input = get_input(filename)
     input = remove_empty_lines(input)
-    output = validate_answer3(input)
+    output = len(validate_answer3(input))
 
     # Assert
-    assert len(output) == expected_output
+    assert output == expected_output
 
 
 def test_save_file(tmp_path):
@@ -113,6 +115,15 @@ def test_save_file(tmp_path):
     expected_output = input
     assert output  == expected_output
 
+def test_read_output():
 
-#def test_input_fails_if_file_not_found():
-#    pass
+    # Arrange
+    expected_output = list
+
+    # Act
+    output_data = read_output()
+    output = type(output_data)
+
+    # Assert
+    assert output == expected_output
+
