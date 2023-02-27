@@ -54,3 +54,12 @@ def validate_answer3(data):
     validated_answer3 = [x for x in data[1:] if int(x[5]) > 0 and int(x[5])<11]
     validated_answer3.insert(0, data[0])
     return validated_answer3
+
+
+def save_output(data, file_path):
+    
+    with open(file_path, 'w', newline='') as filename:
+        writer = csv.writer(filename)
+        writer.writerows(data)
+
+    return data
