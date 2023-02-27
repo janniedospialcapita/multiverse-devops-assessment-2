@@ -61,5 +61,3 @@ def save_output(data, file_path):
     with open(file_path, 'w', newline='') as filename:
         writer = csv.writer(filename)
         writer.writerows(data)
-
-    return data
