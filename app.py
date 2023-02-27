@@ -3,6 +3,7 @@ from extract import get_input
 from extract import remove_duplicates
 from extract import remove_empty_lines
 from extract import capitalise_names
+from extract import validate_answer3
 
 filename = "results.csv"
 
@@ -11,6 +12,7 @@ data = remove_duplicates(data)
 data = remove_duplicates(data)
 data = remove_empty_lines(data)
 data = capitalise_names(data)
+data = validate_answer3(data)
 
 for i in data:
     print(i)
