@@ -1,4 +1,4 @@
-from extract import get_input
+from input import get_input
 
 def read_output():
     data = get_input('clean_results.csv')

@@ -1,9 +1,9 @@
-from extract import get_input
-from extract import remove_duplicates
-from extract import remove_empty_lines
-from extract import capitalise_names
-from extract import validate_answer3
-from extract import save_output
+from input import get_input
+from input import remove_duplicates
+from input import remove_empty_lines
+from input import capitalise_names
+from input import validate_answer3
+from input import save_output
 from output import read_output
 
 filename = "results.csv"
