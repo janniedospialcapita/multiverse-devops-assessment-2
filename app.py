@@ -8,11 +8,16 @@ from output import read_output
 
 filename = "results.csv"
 
-data = get_input(filename)
-data = remove_duplicates(data)
-data = remove_duplicates(data)
-data = remove_empty_lines(data)
-data = capitalise_names(data)
-data = validate_answer3(data)
-save_output(data, 'clean_results.csv')
-read_output()
+def main(filename):
+
+    data = get_input(filename)
+    data = remove_duplicates(data)
+    data = remove_duplicates(data)
+    data = remove_empty_lines(data)
+    data = capitalise_names(data)
+    data = validate_answer3(data)
+    save_output(data, 'clean_results.csv')
+    read_output()
+
+if __name__ == "__main__":
+    main(filename)
