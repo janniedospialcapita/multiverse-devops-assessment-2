@@ -24,7 +24,7 @@ jobs:
       run: python -m pip install --upgrade pip
 
     - name: Install requirements
-      run: python -m pip install -r requirements.txt
+      run: python -m pip install -r ./python-survey-app/requirements.txt
 
     - name: Run pytest
       run: pytest
