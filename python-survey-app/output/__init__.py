@@ -1,7 +1,7 @@
 from input import get_input
 
-def read_output():
-    data = get_input('clean_results.csv')
+def read_output(filepath):
+    data = get_input(filepath)
 
     user_id = []
     first_name = []

@@ -119,9 +119,10 @@ def test_read_output():
 
     # Arrange
     expected_output = list
+    test_data = 'results.csv'
 
     # Act
-    output_data = read_output()
+    output_data = read_output(test_data)
     output = type(output_data)
 
     # Assert
