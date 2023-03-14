@@ -127,4 +127,3 @@ def test_read_output():
 
     # Assert
     assert output == expected_output
-
