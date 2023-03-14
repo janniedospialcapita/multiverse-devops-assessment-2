@@ -9,6 +9,8 @@ yum install -y nginx python3
 systemctl enable nginx
 systemctl start nginx
 
+the_bucket = ${s3_bucket}
+
 cat <<EOT > /usr/share/nginx/html/index.html
 <html>
     <head>
@@ -33,7 +35,7 @@ cat <<EOT > /usr/share/nginx/html/index.html
                 var fileChooser = document.getElementById('file-chooser');
                 var file = fileChooser.files[0];
                 if (file) {
-                    var params = {Bucket: 'multiverse', Key: file.name, Body: file};
+                    var params = {Bucket: ${s3_bucket}, Key: file.name, Body: file};
                     s3.upload(params, function(err, data) {
                         if (err) {
                             console.log('Error uploading file:', err);
