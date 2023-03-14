@@ -57,7 +57,8 @@ jobs:
       run: terraform apply -auto-approve
       if: |
         github.ref_name == 'master' &&
-        github.event_name != 'pull_request'
+        github.event_name != 'pull_request' &&
+        !contains(github.event.head_commit.message, 'cleanup')
     - name: Commit the Terraform state file
       uses: EndBug/add-and-commit@v9
       if: |
