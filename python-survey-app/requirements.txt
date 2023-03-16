@@ -2,3 +2,6 @@ pandas
 numpy
 pytest
 pytest-cov
+os
+sys
+sqlite3

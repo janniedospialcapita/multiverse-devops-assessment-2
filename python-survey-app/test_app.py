@@ -2,6 +2,10 @@ import pytest
 import pandas as pd
 import numpy as np
 import re
+import os
+import sys
+
+sys.path.append('./app')
 
 from input import get_input
 from input import remove_duplicates
@@ -10,6 +14,8 @@ from input import capitalise_names
 from input import validate_answer3
 from input import save_output
 from output import read_output
+
+os.chdir("./app/")
 
 def test_input_is_list():
     

@@ -1,7 +1,9 @@
 from input import get_input
 
-def read_output(filepath):
-    data = get_input(filepath)
+def read_output(filepath=None, data=None):
+
+    if data is None:
+        data = get_input(filepath)        
 
     user_id = []
     first_name = []
@@ -17,8 +19,12 @@ def read_output(filepath):
         answer_1.append(i[3])
         answer_2.append(i[4])
         answer_3.append(i[5])
-        
+
+    user_id = [str(x) for x in user_id]
+    answer_3 = [str(x) for x in answer_3]    
+    
     more_space = 2
+
 
     user_id_max = len(max(user_id, key=len)) + more_space
     first_name_max = len(max(first_name, key=len)) + more_space
