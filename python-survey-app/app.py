@@ -17,7 +17,7 @@ def main(filename):
     data = capitalise_names(data)
     data = validate_answer3(data)
     save_output(data, 'clean_results.csv')
-    read_output()
+    read_output('clean_results.csv')
 
 if __name__ == "__main__":
     main(filename)

@@ -1,6 +1,16 @@
-*.csv*
 *__pycache__/
 *.pytest_cache/*
 *.ipynb*
 .ipynb.checkpoints/
 *.pyc
+.bak
+*clean_results.csv
+*results2.csv
+
+*instruction.txt*
+
+*aws-credentials*
+
+*~/*
+
+terraform-iac/.terraform*
