@@ -124,6 +124,8 @@ def test_capitalise():
     assert last_name_upper == last_name
     assert len(failed_mc) == 0
     assert len(failed_o) == 0
+    assert 'McTest' in last_name_upper
+
 
 
 def test_answer3_validation():
