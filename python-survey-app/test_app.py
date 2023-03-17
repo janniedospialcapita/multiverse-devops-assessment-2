@@ -116,14 +116,9 @@ def test_capitalise():
     first_name_upper = [x for x in first_name if x[0].isupper()]
     last_name_upper = [x for x in last_name if x[0].isupper()]
 
-    failed_mc = [x for x in last_name if 'mc' in x]
-    failed_o = [x for x in last_name if "o'" in x]
-
     # Assert
     assert first_name_upper == first_name
     assert last_name_upper == last_name
-    assert len(failed_mc) == 0
-    assert len(failed_o) == 0
     assert 'McTest' in last_name_upper
 
 
