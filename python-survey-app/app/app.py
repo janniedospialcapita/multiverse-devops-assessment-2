@@ -1,3 +1,7 @@
+import sqlite3 
+import sys 
+
+
 from input import get_input
 from input import remove_duplicates
 from input import remove_empty_lines
@@ -5,19 +9,15 @@ from input import capitalise_names
 from input import validate_answer3
 from input import save_output
 from output import read_output
-
-
-import sqlite3 
-import sys 
 from sqldb import * 
-
 
 filename = "results.csv"
 
-def main(): 
+def main(filename=None, data=None): 
     db = sqlite3.connect('results.db')
 
-    data = get_input(filename)
+    if data is None:
+        data = get_input(filename)
 
     create_table_results(db)
     show_tables(db)
@@ -46,4 +46,4 @@ def main():
     db.close() 
     
 if __name__ == '__main__': 
-    sys.exit(main())
+    sys.exit(main(filename=filename))

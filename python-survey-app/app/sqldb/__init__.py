@@ -53,3 +53,7 @@ def create_table_clean_results(db):
         )
         '''
     )
+
+def delete_from_table(db, table, column, value):
+    cursor = db.execute(f'DELETE FROM {table} WHERE {column} = ?', (value,))
+    db.commit()
