@@ -10,6 +10,8 @@ from sqldb import *
 from output import read_output
 
 from app import main
+from app_out import app_out
+from db_out import db_out
 
 os.chdir("./app/")
 
@@ -180,7 +182,7 @@ def test_read_output():
     # Assert
     assert output == expected_output
 
-def test_main_sqlite():
+def test_app_sqlite():
 
     # Arrange:
     test_data = [
@@ -202,3 +204,28 @@ def test_main_sqlite():
     for table in ['results', 'clean_results']:
         delete_from_table(db, table, 'last_name', 'Test')
     db.close()
+
+def test_app_out():
+
+    # Arrange
+    expected_output = list
+    test_data = 'results.csv'
+
+    # Act
+    output_data = app_out(test_data)
+    output = type(output_data)
+
+    # Assert
+    assert output == expected_output
+
+def test_db_out():
+
+    # Arrange
+    expected_output = list
+
+    # Act
+    output_data = db_out()
+    output = type(output_data)
+
+    # Assert
+    assert output == expected_output
