@@ -12,7 +12,7 @@ def get_input(filename):
 
 
 def remove_duplicates(data):
-    data_deduped =[]
+    data_deduped = []
     for i in data:
         if i not in data_deduped:
             data_deduped.append(i)
@@ -21,21 +21,13 @@ def remove_duplicates(data):
 
 
 def remove_empty_lines(data):
-    lines_not_empty =[]
+    lines_not_empty = []
     for i in data:
         if len([x for x in i if x != '']) > 0:
             lines_not_empty.append(i)
 
     return lines_not_empty
 
-
-def remove_empty_lines(data):
-    lines_not_empty =[]
-    for i in data:
-        if len([x for x in i if x != '']) > 0:
-            lines_not_empty.append(i)
-
-    return lines_not_empty
 
 def capitalise_names(data):
     def McOcase(match):

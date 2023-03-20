@@ -1,17 +1,22 @@
 import pytest
-import pandas as pd
-import numpy as np
-import re
+import os
+import sys
+import sqlite3
 
-from input import get_input
-from input import remove_duplicates
-from input import remove_empty_lines
-from input import capitalise_names
-from input import validate_answer3
-from input import save_output
+sys.path.append('./app')
+
+from input import *
+from sqldb import *
 from output import read_output
 
-def test_input_is_list():
+from app import main
+from app_out import app_out
+from db_out import db_out
+
+os.chdir("./app/")
+
+
+def test_input_is_list_of_lists():
     
     # Arrange
     filename = "results.csv"
@@ -19,82 +24,131 @@ def test_input_is_list():
 
     # Act
     output = type(get_input(filename))
+    output2 = type(get_input(filename)[0])
 
     # Assert
     assert output == expected_output
+    assert output2 == expected_output
+
+def test_columns():
+
+    # Arrange
+    filename = "results.csv"
+
+    expected_cols = [
+        'user_id', 
+        'first_name', 
+        'last_name', 
+        'answer_1', 
+        'answer_2', 
+        'answer_3',
+        ]
+    
+    # Act
+    input_data = get_input(filename)
+
+    # Assert
+    assert input_data[0] == expected_cols
+
 
 def test_duplicates_removal():
-    
+
     # Arrange
     filename = "results.csv"
-    df = pd.read_csv(filename)
-    df = df.drop_duplicates()
-    expected_output = df.shape[0] + 1
-    
+    input_data = get_input(filename)
+
+    input_data2 = [
+        ['cheese', 'wine'], 
+        ['cheese', 'kale'], 
+        ['spinach', 'tea'], 
+        ['cheese', 'wine'], 
+        ['spinach', 'coffee']
+        ]
+
+    distinct_list = []
+    dupe_list = []
+
     # Act
-    input = get_input(filename)
-    output = len(remove_duplicates(input))
-    
-    # Assert
-    assert output == expected_output
+    input_data = remove_duplicates(input_data)
+    input_data2 = remove_duplicates(input_data2)
 
-def test_empty_line_removal():
+    for x in [input_data, input_data2]:
+        for i in x:
+            if i not in distinct_list:
+                distinct_list.append(i)
+            else:
+                dupe_list.append(i)
+
+    # Assert
+    assert len(dupe_list) == 0
     
+
+def test_remove_empty_lines():
+
     # Arrange
     filename = "results.csv"
-    df = pd.read_csv(filename)
-    df = df.dropna(how='all')
-    expected_output = df.shape[0] + 1
+    input_data = get_input(filename)
+    empty_row = ['' for x in range(len(input_data[0]))]
+    input_data.append(empty_row)
 
-     # Act
-    input = get_input(filename)
-    output = len(remove_empty_lines(input))
-    
+    # Act
+    output = remove_empty_lines(input_data)
+
     # Assert
-    assert output == expected_output
+    assert empty_row not in output
 
 def test_capitalise():
-    
+
     # Arrange
     filename = "results.csv"
-    def McOcase(match):
-        return match.group(1)+match.group(2).upper()
-    df = pd.read_csv(filename)
-    df = df.replace(np.NaN, '')
-    df['first_name'] = df['first_name'].str.capitalize()
-    df['last_name'] = df['last_name'].str.capitalize()
-    df['last_name']=df.last_name.str.replace(r"\b(Mc)([a-z])", McOcase,  regex=True, flags=re.IGNORECASE)
-    df['last_name']=df.last_name.str.replace(r"(\bO\')([a-z])", McOcase,  regex=True, flags=re.IGNORECASE)
-    df['last_name']=df.last_name.str.replace(r"(\')([a-z])", McOcase,  regex=True, flags=re.IGNORECASE)
-    expected_output1 = df['first_name'].to_list()
-    expected_output2 = df['last_name'].to_list()
+    input_data = get_input(filename)
+    input_data = remove_empty_lines(input_data)
+    lower_case_row = ['3', 'test', 'mctest', 't', 't', 0]
+    input_data.append(lower_case_row)
+    first_name = []
+    last_name = []
 
     # Act
-    input = get_input(filename)
-    output = capitalise_names(input)
-    output1 = [x[1] for x in input[1:]]
-    output2 = [x[2] for x in input[1:]] 
+    input_data = capitalise_names(input_data)
+    
+    for i in input_data[1:]:
+        first_name.append(i[1])
+        last_name.append(i[2])
+
+    first_name_upper = [x for x in first_name if x[0].isupper()]
+    last_name_upper = [x for x in last_name if x[0].isupper()]
 
     # Assert
-    assert output1 == expected_output1
-    assert output2 == expected_output2
+    assert first_name_upper == first_name
+    assert last_name_upper == last_name
+    assert 'McTest' in last_name_upper
+
+
 
 def test_answer3_validation():
     
     # Arrange
     filename = "results.csv"
-    df = pd.read_csv(filename)
-    df = df.dropna(how='all')
-    df = df[(df['answer_3'] > 0) & (df['answer_3'] < 11)]
-    expected_output = len(df) + 1
-    
+    input_data = get_input(filename)
+    input_data = remove_empty_lines(input_data)
+    input_data = capitalise_names(input_data)
+    invalid_rows = [
+        ['', '', '', '', '', 15],
+        ['', '', '', '', '',0],
+    ]
+    input_data.extend(invalid_rows)
     # Act
-    input = get_input(filename)
-    input = remove_empty_lines(input)
-    output = len(validate_answer3(input))
+    input_data = validate_answer3(input_data)
+
+    answer_3 = []
+
+    for i in input_data[1:]:
+        answer_3.append(int(i[5]))
+
+    fail = [x for x in answer_3 if x > 10 or x < 1]
 
     # Assert
-    assert output == expected_output
+    assert len(fail) == 0
 
 
 def test_save_file(tmp_path):
@@ -107,12 +161,12 @@ def test_save_file(tmp_path):
     filename = 'results.csv'    
 
     # Act
-    input = get_input(filename)
-    save_output(input, temp_file_dir)
+    input_data = get_input(filename)
+    save_output(input_data, temp_file_dir)
 
     # Assert
     output = get_input(temp_file_dir)
-    expected_output = input
+    expected_output = input_data
     assert output  == expected_output
 
 def test_read_output():
@@ -123,6 +177,54 @@ def test_read_output():
 
     # Act
     output_data = read_output(test_data)
+    output = type(output_data)
+
+    # Assert
+    assert output == expected_output
+
+def test_app_sqlite():
+
+    # Arrange:
+    test_data = [
+    [1, 'Test', 'Test', 'yes', 'c', 7],
+    [2, 'Test', 'Test', 'yes', 'b', 7],
+    ]
+    
+    # Act
+    main(data=test_data)
+    db = sqlite3.connect('results.db')
+    test_result = select_all(db, 'clean_results')
+    test_result = [list(x) for x in test_result]
+  
+    # Assert
+    assert len([x for x in test_data if x in test_result]) == 2
+
+    # Cleanup
+    db = sqlite3.connect('results.db')
+    for table in ['results', 'clean_results']:
+        delete_from_table(db, table, 'last_name', 'Test')
+    db.close()
+
+def test_app_out():
+
+    # Arrange
+    expected_output = list
+    test_data = 'results.csv'
+
+    # Act
+    output_data = app_out(test_data)
+    output = type(output_data)
+
+    # Assert
+    assert output == expected_output
+
+def test_db_out():
+
+    # Arrange
+    expected_output = list
+
+    # Act
+    output_data = db_out()
     output = type(output_data)
 
     # Assert
