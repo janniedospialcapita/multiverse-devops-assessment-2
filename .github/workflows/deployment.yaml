@@ -3,10 +3,10 @@ name: Multiverse App Deployment Workflow
 on:
   workflow_dispatch:
     inputs:
-    s3_bucket:
-      description: 'The S3 bucket name'
-      required: true
-      type: string
+      s3_bucket:
+        description: 'The S3 bucket name'
+        required: true
+        type: string
 
 jobs:
   deploy:
