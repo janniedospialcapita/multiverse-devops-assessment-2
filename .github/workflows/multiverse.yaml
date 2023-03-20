@@ -65,14 +65,14 @@ jobs:
       if: |
         github.ref_name == 'master' &&
         github.event_name != 'pull_request' &&
-        !(contains(github.event.head_commit.message, 'cleanup'))
+        #!(contains(github.event.head_commit.message, 'cleanup'))
         
     - name: Commit the Terraform state file
       uses: EndBug/add-and-commit@v9
       if: |
         github.ref_name == 'master' &&
         github.event_name != 'pull_request' &&
-        !(contains(github.event.head_commit.message, 'cleanup'))
+        #!(contains(github.event.head_commit.message, 'cleanup'))
       with:
         add: '*.tfstate*'
         cwd: './terraform-iac'
