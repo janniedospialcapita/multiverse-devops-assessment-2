@@ -39,14 +39,14 @@ rm -rf /root/code
 mkdir -p /root/code
 aws s3 cp s3://${s3_bucket}/code.zip /tmp/code.zip
 unzip /tmp/code.zip -d /root/code/
-aws s3 cp s3://${s3_bucket}/results.csv root/code/python-survey-app/app/results.csv
-python3 /root/code/python-survey-app/app/app.py
-python3 /root/code/python-survey-app/app/app_out.py > /root/code/python-survey-app/app/file_results.txt
-python3 /root/code/python-survey-app/app/db_out.py > /root/code/python-survey-app/app/db_results.txt
-aws s3 cp /root/code/python-survey-app/app/results.db s3://${s3_bucket}/results.db
-aws s3 cp /root/code/python-survey-app/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
-aws s3 cp /root/code/python-survey-app/app/file_results.txt s3://${s3_bucket}/file_results.txt
-aws s3 cp /root/code/python-survey-app/app/db_results.txt s3://${s3_bucket}/db_results.txt
+aws s3 cp s3://${s3_bucket}/results.csv root/code/app/results.csv
+python3 /root/code/app/app.py
+python3 /root/code/app/app_out.py > /root/code/app/file_results.txt
+python3 /root/code/app/db_out.py > /root/code/app/db_results.txt
+aws s3 cp /root/code/app/results.db s3://${s3_bucket}/results.db
+aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
+aws s3 cp /root/code/app/file_results.txt s3://${s3_bucket}/file_results.txt
+aws s3 cp /root/code/app/db_results.txt s3://${s3_bucket}/db_results.txt
 EOT
 cat <<EOT >> /etc/cron.d/mvws9
 * * * * * root /bin/bash /root/mvws9.sh
