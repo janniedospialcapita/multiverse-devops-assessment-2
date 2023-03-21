@@ -48,6 +48,7 @@ aws s3 cp /root/code/app/results.db s3://${s3_bucket}/results.db
 aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
 aws s3 cp /root/code/app/file_results.txt s3://${s3_bucket}/file_results.txt
 aws s3 cp /root/code/app/db_results.txt s3://${s3_bucket}/db_results.txt
+aws s3 cp /root/code/app/sql_operations.txt s3://${s3_bucket}/sql_operations.txt
 EOT
 cat <<EOT >> /etc/cron.d/mvws9
 * * * * * root /bin/bash /root/mvws9.sh
