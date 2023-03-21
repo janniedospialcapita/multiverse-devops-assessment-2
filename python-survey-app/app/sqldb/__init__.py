@@ -21,7 +21,7 @@ def show_tables(db):
         WHERE type ='table' AND name NOT LIKE 'sqlite_%' 
         ''')
     result = cursor.fetchall() 
-    print(result) 
+    print(f'Tables in the database: {result}') 
     
 def describe_table(db, table): 
     cursor = db.execute(

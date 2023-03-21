@@ -19,7 +19,6 @@ def main(filename=None, data=None):
         data = get_input(filename)
 
     create_table_results(db)
-    show_tables(db)
     describe_table(db, 'results')
     select_all(db, 'results')
     insert_data(db, 'results', data)
@@ -34,8 +33,9 @@ def main(filename=None, data=None):
     save_output(data, 'clean_results.csv')
 
     create_table_clean_results(db)
-    show_tables(db)
     describe_table(db, 'clean_results')
+    print()
+    show_tables(db)
     insert_data(db, 'clean_results', data)
     db.close()
     
