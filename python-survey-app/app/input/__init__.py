@@ -4,7 +4,7 @@ import re
 def get_input(filename):
     
 
-    with open(filename, newline='') as f:
+    with open(filename) as f:
         reader = csv.reader(f)
         data = list(reader)
 
@@ -50,6 +50,6 @@ def validate_answer3(data):
 
 def save_output(data, file_path):
     
-    with open(file_path, 'w', newline='') as filename:
+    with open(file_path, 'w') as filename:
         writer = csv.writer(filename)
         writer.writerows(data)
