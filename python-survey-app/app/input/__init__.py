@@ -50,6 +50,6 @@ def validate_answer3(data):
 
 def save_output(data, file_path):
     
-    with open(file_path, 'w') as filename:
+    with open(file_path, 'w', newline='') as filename:
         writer = csv.writer(filename)
         writer.writerows(data)

@@ -22,6 +22,7 @@ def show_tables(db):
             WHERE type ='table' AND name NOT LIKE 'sqlite_%' 
             ''')
     except sqlite3.OperationalError:
+        cursor = db.execute(
             ''' 
             SELECT name 
             FROM sqlite_master 

@@ -219,6 +219,16 @@ def test_app_out():
     assert output == expected_output
 
 def test_db_out():
+    test_data = [
+    [1, 'Test', 'Test', 'yes', 'c', 7],
+    [2, 'Test', 'Test', 'yes', 'b', 7],
+    ]
+
+    db = sqlite3.connect('results.db')
+    create_table_results(db)
+    create_table_clean_results(db)
+    insert_data(db, 'results', test_data)
+    insert_data(db, 'clean_results', test_data)
 
     # Arrange
     expected_output = list
@@ -226,6 +236,9 @@ def test_db_out():
     # Act
     output_data = db_out()
     output = type(output_data)
+    for table in ['results', 'clean_results']:
+        delete_from_table(db, table, 'last_name', 'Test')
+    db.close()
 
     # Assert
     assert output == expected_output
