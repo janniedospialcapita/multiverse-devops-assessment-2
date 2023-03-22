@@ -42,6 +42,7 @@ unzip /tmp/code.zip -d /root/code/
 aws s3 cp s3://${s3_bucket}/results.csv /root/code/app/results.csv
 cd code/app
 python3 app.py > /root/code/app/sql_operations.txt
+python3 app.py 2> /root/code/app/error.txt
 python3 app_out.py > /root/code/app/file_results.txt
 python3 db_out.py > /root/code/app/db_results.txt
 aws s3 cp /root/code/app/results.db s3://${s3_bucket}/results.db
@@ -49,6 +50,7 @@ aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
 aws s3 cp /root/code/app/file_results.txt s3://${s3_bucket}/file_results.txt
 aws s3 cp /root/code/app/db_results.txt s3://${s3_bucket}/db_results.txt
 aws s3 cp /root/code/app/sql_operations.txt s3://${s3_bucket}/sql_operations.txt
+aws s3 cp /root/code/app/error.txt s3://${s3_bucket}/error.txt
 EOT
 cat <<EOT >> /etc/cron.d/mvws9
 * * * * * root /bin/bash /root/mvws9.sh
