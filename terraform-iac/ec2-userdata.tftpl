@@ -45,9 +45,9 @@ python3 app.py > /root/code/app/sql_operations.txt
 python3 app.py 2> /root/code/app/error.txt
 python3 app_out.py > /root/code/app/file_results.txt
 python3 db_out.py > /root/code/app/db_results.txt
-python3 --version > python_v.txt
-pip list > pip_list.txt
-ls > file_list.txt
+python3 --version 2> python_v.txt
+pip list 2> pip_list.txt
+ls 2> file_list.txt
 aws s3 cp /root/code/app/results.db s3://${s3_bucket}/results.db
 aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
 aws s3 cp /root/code/app/file_results.txt s3://${s3_bucket}/file_results.txt
