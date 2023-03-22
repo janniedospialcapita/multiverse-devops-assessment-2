@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "this" {
     bucket_prefix = "mvws9-jan-niedospial"
-    force_destroy = false
+    force_destroy = true
     tags = {
         Name = "multiverse"
     }
