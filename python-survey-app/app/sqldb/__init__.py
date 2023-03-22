@@ -1,3 +1,6 @@
+import sqlite3
+from sqlite3 import OperationalError
+
 def create_table_results(db): 
     db.execute(
         '''
@@ -21,7 +24,7 @@ def show_tables(db):
             FROM sqlite_schema 
             WHERE type ='table' AND name NOT LIKE 'sqlite_%' 
             ''')
-    except 'sqlite3.OperationalError':
+    except OperationalError:
         cursor = db.execute(
             ''' 
             SELECT name 
@@ -36,7 +39,7 @@ def describe_table(db, table):
         cursor = db.execute(
             f'SELECT sql FROM sqlite_schema WHERE name = "{table}"'
             )
-    except 'sqlite3.OperationalError':
+    except OperationalError:
         cursor = db.execute(
             f'SELECT sql FROM sqlite_master WHERE name = "{table}"'
             )
