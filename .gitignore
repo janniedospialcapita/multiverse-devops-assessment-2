@@ -15,3 +15,5 @@
 
 terraform-iac/.terraform*
 *.coverage*
+*bla.py
+*BBBBBBB.csv
