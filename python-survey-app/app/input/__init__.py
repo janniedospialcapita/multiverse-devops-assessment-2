@@ -1,7 +1,20 @@
-import csv
+#import csv
 import re
 
+
 def get_input(filename):
+    with open(filename, 'r') as f:
+        data = []
+        for row in f:
+                row = row.rstrip('\n')
+                row = row.split(',')
+                data.append(row)
+        
+        return data
+
+
+"""
+def get_input_old(filename):
     
 
     with open(filename) as f:
@@ -9,7 +22,7 @@ def get_input(filename):
         data = list(reader)
 
     return data
-
+"""
 
 def remove_duplicates(data):
     data_deduped = []
@@ -48,8 +61,25 @@ def validate_answer3(data):
     return validated_answer3
 
 
-def save_output(data, file_path):
+def save_output(data, filename):
+    result_string = ''
+
+    for row in data:
+        row[0] = str(row[0])
+        row[-1] = str(row[-1])
+            
+        row = f"{','.join(row)}\n"
+        result_string += row
+
+    result_string = result_string.strip('\n')
+
+    with open(filename, "w") as f:
+        f.write(result_string)
+
+"""
+def save_output_old(data, file_path):
     
     with open(file_path, 'w', newline='') as filename:
         writer = csv.writer(filename)
         writer.writerows(data)
+"""
