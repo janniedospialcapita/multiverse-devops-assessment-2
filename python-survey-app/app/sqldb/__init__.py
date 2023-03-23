@@ -48,7 +48,6 @@ def describe_table(db, table):
 
 def select_all(db, table):
     cursor = db.execute(f'SELECT * FROM {table}')
-    cursor.fetchone()
     result = cursor.fetchall()
     return result
 

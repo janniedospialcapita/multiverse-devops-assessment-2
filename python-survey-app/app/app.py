@@ -13,6 +13,9 @@ from sqldb import *
 filename = "results.csv"
 
 def main(filename=None, data=None): 
+    print(f'sqlite3 version: {sqlite3.sqlite_version}')
+    print()
+
     db = sqlite3.connect('results.db')
 
     if data is None:
