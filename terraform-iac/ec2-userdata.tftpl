@@ -3,7 +3,7 @@ yum update -y
 yum install -y unzip
 amazon-linux-extras enable nginx1 python3
 yum clean metadata
-yum install -y nginx python3
+yum install -y nginx python3-10.7
 systemctl enable nginx
 systemctl start nginx
 cat <<EOT > /usr/share/nginx/html/index.html
