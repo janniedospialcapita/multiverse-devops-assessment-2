@@ -23,7 +23,6 @@ def main(filename=None, data=None):
     select_all(db, 'results')
     insert_data(db, 'results', data)
 
-    #data = select_all(db, 'results')
     data = [list(x) for x in data]
     data = remove_duplicates(data)
     data = remove_duplicates(data)
