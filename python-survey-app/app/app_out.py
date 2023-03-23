@@ -1,7 +1,7 @@
 import sys
 from output import read_output
     
-filename = 'clean_results.csv'
+filename = './data/out/clean_results.csv'
 
 def app_out(filename=None):
 

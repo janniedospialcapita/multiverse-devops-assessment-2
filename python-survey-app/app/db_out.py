@@ -6,7 +6,7 @@ from sqldb import select_all
 
 def db_out():
     
-    db = sqlite3.connect('results.db')
+    db = sqlite3.connect('./db/results.db')
     clean_results = select_all(db, 'clean_results')
     data = read_output(data=clean_results)
 

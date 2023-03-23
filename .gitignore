@@ -1,20 +1,24 @@
 *__pycache__/
 *.pytest_cache/*
-*.ipynb*
 .ipynb.checkpoints/
-*.pyc
-.bak
-*clean_results.csv
-*results2.csv
+~/*
+terraform-iac/.terraform*
 
-*instruction.txt*
+*.ipynb*
+*.pyc
+*.bak
+*.coverage*
+#*.db
 
 *aws-credentials*
+*clean_results.csv
+*instruction.txt*
 
-*~/*
 
-terraform-iac/.terraform*
-*.coverage*
-*bla.py
-*BBBBBBB.csv
-*.db
+
+
+
+
+
+
+

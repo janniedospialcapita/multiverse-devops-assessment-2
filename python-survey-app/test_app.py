@@ -19,7 +19,7 @@ os.chdir("./app/")
 def test_input_is_list_of_lists():
     
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
     expected_output = list
 
     # Act
@@ -33,7 +33,7 @@ def test_input_is_list_of_lists():
 def test_columns():
 
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
 
     expected_cols = [
         'user_id', 
@@ -54,7 +54,7 @@ def test_columns():
 def test_duplicates_removal():
 
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
     input_data = get_input(filename)
 
     input_data2 = [
@@ -86,7 +86,7 @@ def test_duplicates_removal():
 def test_remove_empty_lines():
 
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
     input_data = get_input(filename)
     empty_row = ['' for x in range(len(input_data[0]))]
     input_data.append(empty_row)
@@ -100,7 +100,7 @@ def test_remove_empty_lines():
 def test_capitalise():
 
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
     input_data = get_input(filename)
     input_data = remove_empty_lines(input_data)
     lower_case_row = ['3', 'test', 'mctest', 't', 't', 0]
@@ -128,7 +128,7 @@ def test_capitalise():
 def test_answer3_validation():
     
     # Arrange
-    filename = "results.csv"
+    filename = "./data/test/results.csv"
     input_data = get_input(filename)
     input_data = remove_empty_lines(input_data)
     input_data = capitalise_names(input_data)
@@ -158,7 +158,7 @@ def test_save_file(tmp_path):
     directory.mkdir()
     result_filename = 'clean_results.csv'
     temp_file_dir = directory.joinpath(result_filename)
-    filename = 'results.csv'    
+    filename = './data/test/results.csv'    
 
     # Act
     input_data = get_input(filename)
@@ -173,7 +173,7 @@ def test_read_output():
 
     # Arrange
     expected_output = list
-    test_data = 'results.csv'
+    test_data = './data/test/results.csv'
 
     # Act
     output_data = read_output(test_data)
@@ -192,7 +192,7 @@ def test_app_sqlite():
     
     # Act
     main(data=test_data)
-    db = sqlite3.connect('results.db')
+    db = sqlite3.connect('./db/results.db')
     test_result = select_all(db, 'clean_results')
     test_result = [list(x) for x in test_result]
   
@@ -200,7 +200,7 @@ def test_app_sqlite():
     assert len([x for x in test_data if x in test_result]) == 2
 
     # Cleanup
-    db = sqlite3.connect('results.db')
+    db = sqlite3.connect('./db/results.db')
     for table in ['results', 'clean_results']:
         delete_from_table(db, table, 'last_name', 'Test')
     db.close()
@@ -209,7 +209,7 @@ def test_app_out():
 
     # Arrange
     expected_output = list
-    test_data = 'results.csv'
+    test_data = './data/test/results.csv'
 
     # Act
     output_data = app_out(test_data)
@@ -224,7 +224,7 @@ def test_db_out():
     [2, 'Test', 'Test', 'yes', 'b', 7],
     ]
 
-    db = sqlite3.connect('results.db')
+    db = sqlite3.connect('./db/results.db')
     create_table_results(db)
     create_table_clean_results(db)
     insert_data(db, 'results', test_data)
