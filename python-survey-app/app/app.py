@@ -29,7 +29,7 @@ def main(filename=None, data=None):
     data = remove_duplicates(data)
     data = remove_empty_lines(data)
     data = capitalise_names(data)
-    data = validate_answer3(data)
+    #data = validate_answer3(data)
     save_output(data, 'clean_results.csv')
 
     create_table_clean_results(db)
