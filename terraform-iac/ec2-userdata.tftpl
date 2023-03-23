@@ -48,7 +48,7 @@ python3 db_out.py > /root/code/app/results_db.txt
 python3 --version > /root/code/app/log_python_v.txt
 pip3 list > /root/code/app/log_pip_list.txt
 ls > /root/code/app/log_file_list.txt
-aws s3 cp /root/code/app//db/results.db s3://${s3_bucket}/results.db
+aws s3 cp /root/code/app/db/results.db s3://${s3_bucket}/results.db
 aws s3 cp /root/code/app/data/out/clean_results.csv s3://${s3_bucket}/results_clean.csv
 aws s3 cp /root/code/app/results_latest.txt s3://${s3_bucket}/results_latest.txt
 aws s3 cp /root/code/app/results_db.txt s3://${s3_bucket}/results_db.txt
