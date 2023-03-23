@@ -8,7 +8,7 @@ terraform-iac/.terraform*
 *.pyc
 *.bak
 *.coverage*
-*.db
+#*.db
 
 *aws-credentials*
 *clean_results.csv
