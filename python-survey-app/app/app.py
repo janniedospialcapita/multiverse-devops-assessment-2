@@ -13,6 +13,9 @@ from sqldb import *
 filename = "results.csv"
 
 def main(filename=None, data=None): 
+    print(f'sqlite3 version: {sqlite3.sqlite_version}')
+    print()
+
     db = sqlite3.connect('results.db')
 
     if data is None:
@@ -23,7 +26,6 @@ def main(filename=None, data=None):
     select_all(db, 'results')
     insert_data(db, 'results', data)
 
-    #data = select_all(db, 'results')
     data = [list(x) for x in data]
     data = remove_duplicates(data)
     data = remove_duplicates(data)
