@@ -3,7 +3,7 @@ yum update -y
 yum install -y unzip
 amazon-linux-extras enable nginx1 python3
 yum clean metadata
-yum install -y nginx python3-10.7
+yum install -y nginx python3
 systemctl enable nginx
 systemctl start nginx
 cat <<EOT > /usr/share/nginx/html/index.html
@@ -41,22 +41,22 @@ aws s3 cp s3://${s3_bucket}/code.zip /tmp/code.zip
 unzip /tmp/code.zip -d /root/code/
 aws s3 cp s3://${s3_bucket}/results.csv /root/code/app/results.csv
 cd code/app
-python3 app.py > /root/code/app/sql_operations.txt
-python3 app.py 2> /root/code/app/error.txt
-python3 app_out.py > /root/code/app/file_results.txt
-python3 db_out.py > /root/code/app/db_results.txt
-python3 --version > /root/code/app/python_v.txt
-pip3 list > /root/code/app/pip_list.txt
-ls > /root/code/app/file_list.txt
+python3 app.py > /root/code/app/sql_report.txt
+python3 app.py 2> /root/code/app/log_error.txt
+python3 app_out.py > /root/code/app/results_latest.txt
+python3 db_out.py > /root/code/app/results_db.txt
+python3 --version > /root/code/app/log_python_v.txt
+pip3 list > /root/code/app/log_pip_list.txt
+ls > /root/code/app/log_file_list.txt
 aws s3 cp /root/code/app/results.db s3://${s3_bucket}/results.db
-aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/clean_results.csv
-aws s3 cp /root/code/app/file_results.txt s3://${s3_bucket}/file_results.txt
-aws s3 cp /root/code/app/db_results.txt s3://${s3_bucket}/db_results.txt
-aws s3 cp /root/code/app/sql_operations.txt s3://${s3_bucket}/sql_operations.txt
-aws s3 cp /root/code/app/error.txt s3://${s3_bucket}/error.txt
-aws s3 cp /root/code/app/python_v.txt s3://${s3_bucket}/python_v.txt
-aws s3 cp /root/code/app/pip_list.txt s3://${s3_bucket}/pip_list.txt
-aws s3 cp /root/code/app/file_list.txt s3://${s3_bucket}/file_list.txt
+aws s3 cp /root/code/app/clean_results.csv s3://${s3_bucket}/results_clean.csv
+aws s3 cp /root/code/app/results_latest.txt s3://${s3_bucket}/results_latest.txt
+aws s3 cp /root/code/app/results_db.txt s3://${s3_bucket}/results_db.txt
+aws s3 cp /root/code/app/sql_report.txt s3://${s3_bucket}/sql_report.txt
+aws s3 cp /root/code/app/log_error.txt s3://${s3_bucket}/log_error.txt
+aws s3 cp /root/code/app/log_python_v.txt s3://${s3_bucket}/log_python_v.txt
+aws s3 cp /root/code/app/log_pip_list.txt s3://${s3_bucket}/log_pip_list.txt
+aws s3 cp /root/code/app/log_file_list.txt s3://${s3_bucket}/log_file_list.txt
 EOT
 cat <<EOT >> /etc/cron.d/mvws9
 * * * * * root /bin/bash /root/mvws9.sh

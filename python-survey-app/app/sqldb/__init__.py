@@ -47,8 +47,12 @@ def describe_table(db, table):
     print(result[0])
 
 def select_all(db, table):
+    headers = db.execute(f"PRAGMA table_info({table});")
+    headers = headers.fetchall()
+    headers = [x[1] for x in headers]
     cursor = db.execute(f'SELECT * FROM {table}')
     result = cursor.fetchall()
+    result.insert(0, headers)
     return result
 
 def insert_data(db, table, data):

@@ -24,7 +24,11 @@ def main(filename=None, data=None):
     create_table_results(db)
     describe_table(db, 'results')
     select_all(db, 'results')
-    insert_data(db, 'results', data)
+    if data[0][0] == 'user_id':
+        data_to_load = data[1:]
+    else:
+        data_to_load = data
+    insert_data(db, 'results', data_to_load)
 
     data = [list(x) for x in data]
     data = remove_duplicates(data)
@@ -38,7 +42,11 @@ def main(filename=None, data=None):
     describe_table(db, 'clean_results')
     print()
     show_tables(db)
-    insert_data(db, 'clean_results', data)
+    if data[0][0] == 'user_id':
+        data_to_load = data[1:]
+    else:
+        data_to_load = data
+    insert_data(db, 'clean_results', data_to_load)
     db.close()
     
     print()
