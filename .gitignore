@@ -4,6 +4,7 @@
 ~/*
 terraform-iac/.terraform*
 
+
 *.ipynb*
 *.pyc
 *.bak
@@ -13,7 +14,7 @@ terraform-iac/.terraform*
 *aws-credentials*
 *clean_results.csv
 *instruction.txt*
-
+python-survey-app/app/data/in/results.csv
 
 
 
