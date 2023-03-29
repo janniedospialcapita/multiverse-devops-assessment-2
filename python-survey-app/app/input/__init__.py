@@ -1,4 +1,3 @@
-#import csv
 import re
 
 
@@ -12,17 +11,6 @@ def get_input(filename):
         
         return data
 
-
-"""
-def get_input_old(filename):
-    
-
-    with open(filename) as f:
-        reader = csv.reader(f)
-        data = list(reader)
-
-    return data
-"""
 
 def remove_duplicates(data):
     data_deduped = []
@@ -75,11 +63,3 @@ def save_output(data, filename):
 
     with open(filename, "w") as f:
         f.write(result_string)
-
-"""
-def save_output_old(data, file_path):
-    
-    with open(file_path, 'w', newline='') as filename:
-        writer = csv.writer(filename)
-        writer.writerows(data)
-"""
