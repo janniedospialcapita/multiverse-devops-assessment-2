@@ -26,7 +26,6 @@ def main(filename=None, data=None):
 
     data = [list(x) for x in data]
     data = remove_duplicates(data)
-    data = remove_duplicates(data)
     data = remove_empty_lines(data)
     data = capitalise_names(data)
     data = validate_answer3(data)
@@ -44,7 +43,7 @@ def main(filename=None, data=None):
     db.close()
     
     print()
-    print('Results cleaned, saved and added to database')
+    print('Results cleaned, saved and added to the database')
 
 if __name__ == '__main__': 
     sys.exit(main(filename=filename))
